@@ -28,6 +28,6 @@ dist-ssr
 backend/node_modules
 
 # Archivos de caché, logs, etc., que tampoco deberían subirse
-backend/.env
+.env
 /storage/*.log
 /public/build
