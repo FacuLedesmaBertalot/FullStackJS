@@ -24,7 +24,11 @@ const registrar = async (req, res) => {
 };
 
 const perfil = (req, res) => {
-    res.json({msg: "Mostrando perfil"});
+    res.json({msg: "Mostrando Perfil"});
 };
 
-export { registrar, perfil };
+const confirmar = (req, res) => {
+    res.json({msg: "Confirmando Cuenta"});
+};
+
+export { registrar, perfil, confirmar };
