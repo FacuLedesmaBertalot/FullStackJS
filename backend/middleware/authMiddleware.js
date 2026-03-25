@@ -1,6 +1,13 @@
 
 const checkAuth = (req, res, next) => {
-    console.log('Desde middleware');
+    
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        console.log('Si tiene el token con bearer');
+    }
+
+    const error = new Error('Token no Válido o inexistente');
+    res.status(403).jsoN({msg: error.message});
+
     next();
 }; 
 
