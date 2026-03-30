@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import Alerta from '../components/Alerta';
 const Registrar = () => {
 
   const [ nombre, setNombre ] = useState('');
@@ -7,24 +8,33 @@ const Registrar = () => {
   const [ password, setPassword ] = useState('');
   const [ repetirPassword, setRepetirPassword ] = useState('');
 
+  const [alerta, setAlerta] = useState({});
+
   const handleSubmit = e => {
     e.preventDefault();
 
     if ( [nombre, email, password, repetirPassword].includes('') ) {
-      
+      setAlerta({ msg: 'Hay Campos Vacíos', error: true });
       return;
     }
 
     if (password !== repetirPassword) {
-
+      setAlerta({ msg: 'Las Contraseñas no Son Iguales', error: true });
       return;
     }
 
     if (password.length < 6) {
-
+      setAlerta({ msg: 'La Contraseña es muy corta, agrega mínimo 6 caracteres', error: true });
       return;
     }
+
+    setAlerta({});
+
+    // Creamos el usuario en la API
+    
   }
+
+  const { msg } = alerta;
 
   return (
     <>
@@ -36,6 +46,11 @@ const Registrar = () => {
       </div>
 
       <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white">
+
+        { msg && <Alerta
+          alerta={alerta}
+        />}
+
         <form 
         onSubmit={handleSubmit}
         >
