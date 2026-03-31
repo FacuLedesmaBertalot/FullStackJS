@@ -13,12 +13,12 @@ const emailRegistro = async (datos) => {
 
     try {
         const info = await transporter.sendMail({
-            from: '"Administrador de Veterinaria" faculedesmabertalot@gmail.com',
+            from: '"APV - Administrador de Pacientes de Veterinaria" faculedesmabertalot@gmail.com',
             to: email, 
             subject: 'Confirma tu cuenta',
             text: `Hola ${nombre}, comprueba tu cuenta.`,
             html: `
-                <p>Hola ${nombre}, comprueba tu cuenta en Veterinarios.</p>
+                <p>Hola ${nombre}, comprueba tu cuenta en APV.</p>
                 <p>Tu cuenta ya está casi lista, solo debes confirmarla en el siguiente enlace:</p>
                 <a href="${process.env.FRONTEND_URL}/confirmar/${token}">Confirmar Cuenta</a>
                 <p>Si tú no creaste esta cuenta, puedes ignorar el mensaje.</p>
