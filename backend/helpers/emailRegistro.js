@@ -18,10 +18,42 @@ const emailRegistro = async (datos) => {
             subject: 'Confirma tu cuenta',
             text: `Hola ${nombre}, comprueba tu cuenta.`,
             html: `
-                <p>Hola ${nombre}, comprueba tu cuenta en APV.</p>
-                <p>Tu cuenta ya está casi lista, solo debes confirmarla en el siguiente enlace:</p>
-                <a href="${process.env.FRONTEND_URL}/confirmar/${token}">Confirmar Cuenta</a>
-                <p>Si tú no creaste esta cuenta, puedes ignorar el mensaje.</p>
+                <div style="background-color: #f9fafb; padding: 40px 20px; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+                    <div style="background-color: #ffffff; padding: 40px 30px; border-radius: 12px; max-width: 500px; margin: 0 auto; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);">
+                        
+                        <h1 style="color: #4f46e5; font-size: 28px; font-weight: 900; margin-bottom: 20px; text-align: center; line-height: 1.2;">
+                            Administra tus <span style="color: #000000;">Pacientes</span>
+                        </h1>
+                        
+                        <p style="color: #4b5563; font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
+                            Hola <strong>${nombre}</strong>,
+                        </p>
+                        
+                        <p style="color: #4b5563; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+                            Tu cuenta en APV ya está casi lista. Solo debes confirmarla haciendo clic en el siguiente botón:
+                        </p>
+                        
+                        <div style="text-align: center; margin: 30px 0;">
+                            <a href="${process.env.FRONTEND_URL}/confirmar/${token}" 
+                               style="background-color: #4338ca; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 12px; font-weight: bold; text-transform: uppercase; display: inline-block; font-size: 14px;">
+                                Confirmar Cuenta
+                            </a>
+                        </div>
+                        
+                        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;" />
+                        
+                        <p style="color: #6b7280; font-size: 12px; text-align: center; line-height: 1.5;">
+                            Si el botón no funciona, copia y pega este enlace en tu navegador:<br>
+                            <a href="${process.env.FRONTEND_URL}/confirmar/${token}" style="color: #4f46e5; word-break: break-all;">
+                                ${process.env.FRONTEND_URL}/confirmar/${token}
+                            </a>
+                        </p>
+
+                        <p style="color: #9ca3af; font-size: 12px; text-align: center; margin-top: 20px;">
+                            Si tú no creaste esta cuenta, puedes ignorar este mensaje con seguridad.
+                        </p>
+                    </div>
+                </div>
             `
         });
 
