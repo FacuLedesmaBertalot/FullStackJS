@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Alerta from "../components/Alerta";
 import clienteAxios from "../config/axios";
 
@@ -7,6 +7,7 @@ const NuevoPassword = () => {
   const [password, setPassword] = useState("");
   const [alerta, setAlerta] = useState({});
   const [tokenValido, setTokenValido] = useState(false);
+  const [passwordModificado, setPasswordModificado] = useState(false);
 
   const params = useParams();
   const { token } = params;
@@ -16,8 +17,8 @@ const NuevoPassword = () => {
       try {
         await clienteAxios(`/veterinarios/olvide-password/${token}`);
         setAlerta({
-          msg: 'Coloca tu Nueva Contraseña'
-        })
+          msg: "Coloca tu Nueva Contraseña",
+        });
         setTokenValido(true);
       } catch (error) {
         setAlerta({
@@ -28,6 +29,32 @@ const NuevoPassword = () => {
     };
     comprobarToken();
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (password.length < 6) {
+      setAlerta({
+        msg: "La Contraseña debe ser Mínimo de 6 Caracteres",
+        error: true,
+      });
+      return;
+    }
+    try {
+      const url = `/veterinarios/olvide-password/${token}`;
+      const { data } = await clienteAxios.post(url, { password });
+
+      setAlerta({
+        msg: data.msg
+      })
+      setPasswordModificado(true);
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true,
+      });
+    }
+  };
 
   const { msg } = alerta;
   return (
@@ -40,12 +67,11 @@ const NuevoPassword = () => {
       </div>
 
       <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white">
-
         {msg && <Alerta alerta={alerta} />}
 
         {tokenValido && (
-          <form>
-
+          <>
+          <form onSubmit={handleSubmit}>
             <div className="my-5">
               <label className="uppercase text-gray-600 block text-xl font-bold">
                 Nueva Contraseña
@@ -65,9 +91,12 @@ const NuevoPassword = () => {
               className="bg-indigo-700 w-full py-3 px-10 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-indigo-800 md:w-auto"
             />
           </form>
+
+
+          </>
         )}
 
-        
+        {passwordModificado && <Link className="block text-center my-5 text-gray-500" to="/">Iniciar Sesión</Link>}
       </div>
     </>
   );
