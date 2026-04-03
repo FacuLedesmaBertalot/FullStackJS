@@ -5,4 +5,4 @@ const AdministrarPacientes = () => {
   )
 }
 
-export default AdministrarPacientes
+export default AdministrarPacientes;
