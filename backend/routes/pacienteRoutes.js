@@ -8,7 +8,7 @@ router.route("/")
     .get(checkAuth, obtenerPacientes);
 
 router
-    .route(':id')
+    .route('/:id')
     .get(checkAuth, obtenerPaciente)
     .put(checkAuth, actualizarPaciente)
     .delete(checkAuth, eliminarPaciente);
