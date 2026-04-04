@@ -5,10 +5,15 @@ const PacientesContext = createContext();
 
 export const PacientesProvider = ({children}) => {
 
+    const [pacientes, setPacientes] = useState([]);
+
+
 
     return(
         <PacientesContext.Provider
-            value={{}}
+            value={{
+                pacientes
+            }}
         >
             {children}
         </PacientesContext.Provider>
