@@ -6,12 +6,12 @@ function Formulario() {
     const [nombre, setNombre] = useState('');
     const [propietario, setPropietario] = useState('');
     const [email, setEmail] = useState('');
-    const [fecha, setFecha] = useState(Date.now());
+    const [fecha, setFecha] = useState('');
     const [sintomas, setSintomas] = useState('');
 
     const [alerta, setAlerta] = useState({});
 
-    const {  } = usePacientes();
+    const { guardarPaciente } = usePacientes();
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -24,6 +24,9 @@ function Formulario() {
             })
             return;
         }
+
+        setAlerta({});
+        guardarPaciente({ nombre, propietario, email, fecha, sintomas });
     }
 
     const { msg } = alerta;
