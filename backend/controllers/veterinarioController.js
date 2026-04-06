@@ -157,4 +157,72 @@ const nuevoPassword = async (req, res) => {
     }
 };
 
-export { registrar, perfil, confirmar, autenticar, olvidePassword, comprobarToken, nuevoPassword };
+const actualizarPerfil = async (req, res) => {
+    const veterinario = await Veterinario.findById(req.params.id);
+    if (!veterinario) {
+        const error = new Error('Hubo un Error');
+        return res.status(400).json({ msg: error.message });
+    }
+
+    const { email } = req.body;
+    if (veterinario.email !== req.body.email) {
+        const existeEmail = await Veterinario.findOne({email});
+
+        if (existeEmail) {
+            const error = new Error('Email ya en Uso');
+            return res.status(400).json({ msg: error.message });
+        }
+    }
+
+    try {
+      veterinario.nombre = req.body.nombre;
+      veterinario.email = req.body.email;
+      veterinario.web = req.body.web;
+      veterinario.telefono = req.body.telefono;
+
+      const veterinarioActualizado = await veterinario.save();
+      res.json(veterinarioActualizado);
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const actualizarPassword = async (req, res) => {
+    // Leer los datos
+    const { id } = req.veterinario;
+    const { pwd_actual, pwd_nuevo } = req.body;
+
+    // Comprobar que el veterinario exista
+    const veterinario = await Veterinario.findById(id);
+    if (!veterinario) {
+        const error = new Error('Hubo un Error');
+        return res.status(400).json({ msg: error.message });
+    }
+
+    // Comprobar su contraseña
+    if (await veterinario.comprobarPassword(pwd_actual)) {
+        // Almacenar la nueva contraseña
+
+        veterinario.password = pwd_nuevo;
+        await veterinario.save();
+        res.json({ msg: 'Contraseña Actualizada Correctamente' });
+    } else {
+        const error = new Error('La Contraseña Actual es Incorrecta');
+        return res.status(400).json({ msg: error.message });
+    }
+
+    
+};
+
+export { 
+    registrar, 
+    perfil, 
+    confirmar, 
+    autenticar, 
+    olvidePassword, 
+    comprobarToken, 
+    nuevoPassword, 
+    actualizarPerfil,
+    actualizarPassword 
+};
