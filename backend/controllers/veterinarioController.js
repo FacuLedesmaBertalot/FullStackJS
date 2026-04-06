@@ -188,4 +188,18 @@ const actualizarPerfil = async (req, res) => {
     }
 };
 
-export { registrar, perfil, confirmar, autenticar, olvidePassword, comprobarToken, nuevoPassword, actualizarPerfil };
+const actualizarPassword = async (req, res) => {
+
+}
+
+export { 
+    registrar, 
+    perfil, 
+    confirmar, 
+    autenticar, 
+    olvidePassword, 
+    comprobarToken, 
+    nuevoPassword, 
+    actualizarPerfil,
+    actualizarPassword 
+};
