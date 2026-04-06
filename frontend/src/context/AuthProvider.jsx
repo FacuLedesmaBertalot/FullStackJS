@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, createContext, act } from 'react';
 import clienteAxios from '../config/axios';
 
 const AuthContext = createContext();
@@ -41,13 +41,18 @@ const AuthProvider = ({children}) => {
         setAuth({});
     }
 
+    const actualizarPerfil = datos => {
+        console.log(datos);
+    }
+
     return (
         <AuthContext.Provider
             value={{
                 auth,
                 setAuth,
                 cargando,
-                cerrarSesion
+                cerrarSesion,
+                actualizarPerfil
             }}
         >
             {children}
