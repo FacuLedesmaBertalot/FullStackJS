@@ -29,5 +29,10 @@ backend/node_modules
 
 # Archivos de caché, logs, etc., que tampoco deberían subirse
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.production
 /storage/*.log
 /public/build
