@@ -48,7 +48,7 @@ const EditarPerfil = () => {
                     <input 
                         type="submit" 
                         value="Guardar Cambios"
-                        className="bg-indigo-700 px-10 py-3 font-bold text-white rounded-lg uppercase w-full mt-5" 
+                        className="bg-indigo-700 px-10 py-3 font-bold text-white rounded-lg uppercase w-full mt-5 hover:bg-indigo-800 cursor-pointer" 
                     />
                 </form>
             </div>
